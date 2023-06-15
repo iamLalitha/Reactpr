@@ -61,6 +61,25 @@
 
 import React, {useState} from 'react';
 
+function Statistics({Good, Neutral,Bad}){
+  const all=Good+Neutral+Bad;
+  const average= all/3;
+  const positivePercentage=(Good/all)*100;
+
+  return(
+    <div>
+      <h1>Statistics</h1>
+      <p>Good={Good}</p>
+      <p>Neutral={Neutral}</p>
+      <p>Bad= {Bad}</p>
+      <p>all: {all}</p>
+      <p>average:{average}</p>
+      <p>positive percentage: {positivePercentage}%</p>
+    </div>
+    
+  )
+}
+
 function App() {
 const [Good, setGood] =useState(0);
 const [Neutral, setNeutral]=useState(0);
@@ -91,13 +110,13 @@ const positivePercentage= (Good/all)*100;
       <button onClick={handlegoodClick}>Good</button>
       <button onClick={handleneutralClick}>Neutral</button>
       <button onClick={handlebadClick}>Bad</button>
-      <h1>Statistics</h1>
-      <p>Good={Good}</p>
-      <p>Neutral={Neutral}</p>
-      <p>Bad= {Bad}</p>
-      <p>all: {all}</p>
-      <p>average:{average}</p>
-      <p>positive percentage:{positivePercentage}%</p>
+      <Statistics
+      Good={ Good}
+      Neutral={Neutral}
+      Bad={Bad}
+      all={all}
+      average={average}
+      positivePercentage={positivePercentage}/>
     </div>
   )
 }
