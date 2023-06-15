@@ -110,13 +110,9 @@ const positivePercentage= (Good/all)*100;
       <button onClick={handlegoodClick}>Good</button>
       <button onClick={handleneutralClick}>Neutral</button>
       <button onClick={handlebadClick}>Bad</button>
-      <Statistics
-      Good={ Good}
-      Neutral={Neutral}
-      Bad={Bad}
-      all={all}
-      average={average}
-      positivePercentage={positivePercentage}/>
+      <Button Good={Good}/>
+      <Button Neutral={Neutral}/>
+      <Button Bad={Bad}/>
     </div>
   )
 }
