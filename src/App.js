@@ -59,62 +59,103 @@
 
 // export default App;
 
-import React, {useState} from 'react';
+// import React, {useState} from 'react';
 
-function Statistics({Good, Neutral,Bad}){
-  const all=Good+Neutral+Bad;
-  const average= all/3;
-  const positivePercentage=(Good/all)*100;
+// function Statistics({Good, Neutral,Bad}){
+//   const all=Good+Neutral+Bad;
+//   const average= all/3;
+//   const positivePercentage=(Good/all)*100;
 
-  return(
-    <div>
-      <h1>Statistics</h1>
-      <p>Good={Good}</p>
-      <p>Neutral={Neutral}</p>
-      <p>Bad= {Bad}</p>
-      <p>all: {all}</p>
-      <p>average:{average}</p>
-      <p>positive percentage: {positivePercentage}%</p>
-    </div>
+//   return(
+//     <div>
+//       <h1>Statistics</h1>
+//       <p>Good={Good}</p>
+//       <p>Neutral={Neutral}</p>
+//       <p>Bad= {Bad}</p>
+//       <p>all: {all}</p>
+//       <p>average:{average}</p>
+//       <p>positive percentage: {positivePercentage}%</p>
+//     </div>
     
-  )
-}
+//   )
+// }
 
-function App() {
-const [Good, setGood] =useState(0);
-const [Neutral, setNeutral]=useState(0);
-const [Bad, setBad]=useState(0);
+// function App() {
+// const [Good, setGood] =useState(0);
+// const [Neutral, setNeutral]=useState(0);
+// const [Bad, setBad]=useState(0);
 
-function handlegoodClick(){
-  return(
-    setGood(Good+1)
-  );
-}
-function handlebadClick(){
-  return(
-    setBad(Bad+1)
-  );
-} 
-function handleneutralClick(){
-  return(
-    setNeutral(Neutral+1)
-  );
-}
-const all= Good+Neutral +Bad;
-const average= all/3;
-const positivePercentage= (Good/all)*100;
+// function handlegoodClick(){
+//   return(
+//     setGood(Good+1)
+//   );
+// }
+// function handlebadClick(){
+//   return(
+//     setBad(Bad+1)
+//   );
+// } 
+// function handleneutralClick(){
+//   return(
+//     setNeutral(Neutral+1)
+//   );
+// }
+// const all= Good+Neutral +Bad;
+// const average= all/3;
+// const positivePercentage= (Good/all)*100;
+
+//   return (
+//     <div>
+//       <h1>Give feedback</h1>
+//       <button onClick={handlegoodClick}>Good</button>
+//       <button onClick={handleneutralClick}>Neutral</button>
+//       <button onClick={handlebadClick}>Bad</button>
+//       <Button Good={Good}/>
+//       <Button Neutral={Neutral}/>
+//       <Button Bad={Bad}/>
+//     </div>
+//   )
+// }
+
+// export default App;
+
+//a simple note taking application
+import React, { useState } from 'react';
+import NoteList from './NoteList';
+import AddNoteForm from './AddNoteForm';
+import './App.css';
+
+const App = ({ notes }) => {
+  //set the state
+  const [noteList, setNoteList] = useState(notes);
+//define add note method
+  const addNote = (note) => {
+    setNoteList([...noteList, note]);
+  };
+//define delete note method
+  const deleteNote = (id) => {
+    setNoteList(noteList.filter((note) => note.id !== id));
+  };
+//define update note method
+  const updateNote = (id, updatedNote) => {
+    setNoteList(
+      noteList.map((note) => (note.id === id ? updatedNote : note))
+    );
+  };
 
   return (
     <div>
-      <h1>Give feedback</h1>
-      <button onClick={handlegoodClick}>Good</button>
-      <button onClick={handleneutralClick}>Neutral</button>
-      <button onClick={handlebadClick}>Bad</button>
-      <Button Good={Good}/>
-      <Button Neutral={Neutral}/>
-      <Button Bad={Bad}/>
+      <h1>Note Taking App</h1>
+      <NoteList
+        notes={noteList}
+        deleteNote={deleteNote}
+        updateNote={updateNote}
+      />
+      <AddNoteForm addNote={addNote} />
     </div>
-  )
-}
+  );
+};
 
 export default App;
+
+
