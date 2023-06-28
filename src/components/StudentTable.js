@@ -27,8 +27,8 @@ function StudentTable({ students, setStudents, teachers }) {
 
   return (
     <div>
-      <h2>Student Table</h2>
-      <table>
+      {/* <h2>Student Details</h2> */}
+      <table class="table table-bordered table-dark">
         <thead>
           <tr>
             <th>Name</th>
@@ -67,12 +67,16 @@ function StudentTable({ students, setStudents, teachers }) {
         value={newStudent.assignedTeacher}
         onChange={handleInputChange}
       >
+        
         <option value="">Select Teacher</option>
         {teachers.map((teacher, index) => (
           <option key={index} value={teacher.name}>
             {teacher.name}
           </option>
+       
         ))}
+       
+        
       </select>
       <button onClick={handleAddStudent}>Add Student</button>
     </div>

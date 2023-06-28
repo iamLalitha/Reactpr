@@ -23,8 +23,8 @@ function TeacherTable({ teachers, setTeachers, students }) {
 
   return (
     <div>
-      <h2>Teacher Table</h2>
-      <table>
+      {/* <h2 >Teacher details</h2> */}
+      <table class="table table-bordered table-dark">
         <thead>
           <tr>
             <th>Name</th>

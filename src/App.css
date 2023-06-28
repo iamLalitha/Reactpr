@@ -40,4 +40,15 @@
   .note input[type="checkbox"] {
     margin-right: 5px;
   } */
+ .card {
+ color: #3BBA9C;
+ background-color: #43455c;
+ 
+ }
+ .card-body{
+  background-color: #43455c ;
   
+ }
+ .card-header{
+  background-color:#3C3F58;
+ }
