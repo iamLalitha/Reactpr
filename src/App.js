@@ -120,42 +120,55 @@
 // export default App;
 
 //a simple note taking application
-import React, { useState } from 'react';
-import NoteList from './NoteList';
-import AddNoteForm from './AddNoteForm';
-import './App.css';
+// import React, { useState } from 'react';
+// import NoteList from './NoteList';
+// import AddNoteForm from './AddNoteForm';
+// import './App.css';
 
-const App = ({ notes }) => {
-  //set the state
-  const [noteList, setNoteList] = useState(notes);
-//define add note method
-  const addNote = (note) => {
-    setNoteList([...noteList, note]);
-  };
-//define delete note method
-  const deleteNote = (id) => {
-    setNoteList(noteList.filter((note) => note.id !== id));
-  };
-//define update note method
-  const updateNote = (id, updatedNote) => {
-    setNoteList(
-      noteList.map((note) => (note.id === id ? updatedNote : note))
-    );
-  };
+// const App = ({ notes }) => {
+//   //set the state
+//   const [noteList, setNoteList] = useState(notes);
+// //define add note method
+//   const addNote = (note) => {
+//     setNoteList([...noteList, note]);
+//   };
+// //define delete note method
+//   const deleteNote = (id) => {
+//     setNoteList(noteList.filter((note) => note.id !== id));
+//   };
+// //define update note method
+//   const updateNote = (id, updatedNote) => {
+//     setNoteList(
+//       noteList.map((note) => (note.id === id ? updatedNote : note))
+//     );
+//   };
 
+//   return (
+//     <div>
+//       <h1>Note Taking App</h1>
+//       <NoteList
+//         notes={noteList}
+//         deleteNote={deleteNote}
+//         updateNote={updateNote}
+//       />
+//       <AddNoteForm addNote={addNote} />
+//     </div>
+//   );
+// };
+
+// export default App;
+
+//STUDENT -TEACHER MANAGEMENT DASHBOARD 
+import React from 'react';
+import Dashboard from './components/Dashboard';
+
+function App() {
   return (
     <div>
-      <h1>Note Taking App</h1>
-      <NoteList
-        notes={noteList}
-        deleteNote={deleteNote}
-        updateNote={updateNote}
-      />
-      <AddNoteForm addNote={addNote} />
+      <Dashboard />
     </div>
   );
-};
+}
 
 export default App;
-
 
