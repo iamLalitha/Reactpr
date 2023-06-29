@@ -1,17 +1,34 @@
 import React, { useState } from 'react';
 
-function TeacherTable({ teachers, setTeachers, students }) {
+function TeacherTable({ teachers, setTeachers }) {
   const [newTeacher, setNewTeacher] = useState({
     name: '',
     subject: '',
   });
-//inputchange func
+  //setting the state 
+  const [editedTeacher, setEditedTeacher] = useState(null);
+  const [editMode, setEditMode] = useState(false);
+//handleinput func
   const handleInputChange = (e) => {
-    setNewTeacher({ ...newTeacher, [e.target.name]: e.target.value });
+    if (editMode && editedTeacher) {
+      setEditedTeacher({ ...editedTeacher, [e.target.name]: e.target.value });
+    } else {
+      setNewTeacher({ ...newTeacher, [e.target.name]: e.target.value });
+    }
   };
-//addteacher func
+//handleaddteacher func
   const handleAddTeacher = () => {
-    if (newTeacher.name && newTeacher.subject) {
+    if (editMode && editedTeacher) {
+      const updatedTeachers = teachers.map((teacher, index) => {
+        if (index === editedTeacher.index) {
+          return editedTeacher;
+        }
+        return teacher;
+      });
+      setTeachers(updatedTeachers);
+      setEditedTeacher(null);
+      setEditMode(false);
+    } else if (newTeacher.name && newTeacher.subject) {
       const updatedTeachers = [...teachers, newTeacher];
       setTeachers(updatedTeachers);
       setNewTeacher({
@@ -20,15 +37,28 @@ function TeacherTable({ teachers, setTeachers, students }) {
       });
     }
   };
+//handle delete func
+  const handleDelete = (index) => {
+    const updatedTeachers = [...teachers];
+    updatedTeachers.splice(index, 1);
+    setTeachers(updatedTeachers);
+  };
+//handleedit func
+  const handleEdit = (index) => {
+    const teacherToEdit = teachers[index];
+    setEditedTeacher({ index, ...teacherToEdit });
+    setEditMode(true);
+  };
 
   return (
     <div>
-      {/* <h2 >Teacher details</h2> */}
-      <table class="table table-bordered table-dark">
+      <table className="table table-bordered table-dark">
         <thead>
           <tr>
             <th>Name</th>
             <th>Subject</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -36,6 +66,12 @@ function TeacherTable({ teachers, setTeachers, students }) {
             <tr key={index}>
               <td>{teacher.name}</td>
               <td>{teacher.subject}</td>
+              <td>
+                <button onClick={() => handleDelete(index)}>Delete</button>
+              </td>
+              <td>
+                <button onClick={() => handleEdit(index)}>Edit</button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -46,19 +82,22 @@ function TeacherTable({ teachers, setTeachers, students }) {
         type="text"
         placeholder="Name"
         name="name"
-        value={newTeacher.name}
+        value={editMode ? editedTeacher.name : newTeacher.name}
         onChange={handleInputChange}
       />
       <input
         type="text"
         placeholder="Subject"
         name="subject"
-        value={newTeacher.subject}
+        value={editMode ? editedTeacher.subject : newTeacher.subject}
         onChange={handleInputChange}
       />
-      <button onClick={handleAddTeacher}>Add Teacher</button>
+      <button onClick={handleAddTeacher}>
+        {editMode ? 'Update Teacher' : 'Add Teacher'}
+      </button>
     </div>
   );
 }
 
 export default TeacherTable;
+
